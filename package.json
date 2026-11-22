@@ -1,10 +1,11 @@
 {
   "name": "plume-fonts-workspace",
   "version": "1.0.0",
-  "description": "Plume Sans and Plume Mono: free OFL typefaces (work in progress)",
+  "description": "Plume: a free, open typeface drawn from strokes to match Plume Icons (work in progress)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": ".venv/bin/python scripts/build_plume.py",
+    "preview": "node scripts/preview.mjs",
     "measure": ".venv/bin/python scripts/measure.py",
     "compare": "node scripts/compare.mjs"
   },
@@ -19,8 +20,7 @@
     "@fontsource-variable/hanken-grotesk": "^5.3.0",
     "@fontsource-variable/instrument-sans": "^5.3.0",
     "@fontsource-variable/inter": "^5.3.0",
-    "@fontsource-variable/schibsted-grotesk": "^5.3.0",
-    "inter-ui": "^4.1.1"
+    "@fontsource-variable/schibsted-grotesk": "^5.3.0"
   },
   "private": "true"
 }

@@ -1,4 +1,7 @@
-# Plume Sans: design brief and candidate study (Task 1)
+# Plume: design brief and early look study (history)
+
+Update 2026-11-22: the owner chose to draw Plume from scratch (no Inter, no Söhne, no "Sans" in the name). The study below was
+only an early look comparison; nothing in it is used in the font. The font is built by `scripts/build_plume.py`.
 
 Status: Task 1 done, waiting on the owner's choice of base font (Task 2).
 
