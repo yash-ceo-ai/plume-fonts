@@ -4,7 +4,7 @@
 [Plume Icons](https://github.com/yash-ceo-ai/plume-icons). No outline, spacing or kerning from Inter, Söhne or any other
 font went into it.
 
-Status: **alpha 0.1.0**. Previews (run `npm run preview` and `npm run slider` first if they are missing):
+Status: **alpha 0.3.0**. Previews (run `npm run preview` and `npm run slider` first if they are missing):
 
 - `study/plume.html`: Plume in the Renown UI, with weights, sizes and every character.
 - `study/compare-slider.html`: a before and after slider, today's font (Geist) against Plume, on the same screen.
@@ -18,9 +18,11 @@ rebuild.
 
 - Weights: Regular 400 (stroke 76), Medium 500 (92), SemiBold 600 (110). Files in `fonts/` (TTF and WOFF2).
 - Figures are tabular by default (every digit has the same width), so columns line up.
-- Covers: Basic Latin, Latin-1 accents, Romanian (ă â î ș ț), common symbols, currency (€ £ ¥), arrows (← → ↑ ↓) and ✓.
-- Not yet: Greek, Cyrillic (the app's Greek text falls back to another font until they are drawn), Arabic (uses a fallback
-  font), a variable font file, Plume Mono, hinting, and a full kerning pass.
+- Covers: Basic Latin, Latin-1 accents, Romanian (ă â î ș ț), **Greek** (with tonos), **Cyrillic** (Russian and Ukrainian basics),
+  common symbols, quotes («» ‹› „ ‚ “ ” ‘ ’), currency (€ £ ¥), arrows and ▲ ▼ ↵ ✓. Checked against the Renown app's own text:
+  99% of the English, Romanian and Greek characters (only ⌘ is missing; the app draws it as an icon).
+- Not yet: Arabic (the app uses a fallback font), a variable font file, Plume Mono, hinting, and a full kerning and spacing
+  pass for Greek and Cyrillic.
 
 ## Build
 

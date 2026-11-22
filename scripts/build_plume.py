@@ -16,7 +16,7 @@ from fontTools.pens.transformPen import TransformPen
 from fontTools.pens.ttGlyphPen import TTGlyphPen
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 UPM = 1000
 XH, CAP, ASC, DESC, OVER = 545, 720, 770, -215, 10  # outer x-height, cap height, ascender, descender, round overshoot
 WEIGHTS = {400: ("Regular", 76), 500: ("Medium", 92), 600: ("SemiBold", 110)}
@@ -908,6 +908,75 @@ def _iques(s):
     s.T = lambda x, y: (W - x, CAP - y); _q_(s); s.T = None; return W
 
 
+
+
+# --- more symbols ---
+@glyph("\u2039")
+def _lsa(s):
+    W = 300; h = s.h; s.poly((W - h - 20, 470), (h + 20, 280), (W - h - 20, 90)); return W
+
+
+@glyph("\u203a")
+def _rsa(s):
+    W = 300; h = s.h; s.poly((h + 20, 470), (W - h - 20, 280), (h + 20, 90)); return W
+
+
+@glyph("\u00ab")
+def _ldaq(s):
+    W = 500; h = s.h
+    for dx in (0, 190):
+        s.poly((W - h - 20 - 190 + dx, 470), (h + 20 + dx, 280), (W - h - 20 - 190 + dx, 90))
+    return W - 0
+
+
+@glyph("\u00bb")
+def _rdaq(s):
+    W = 500; h = s.h
+    for dx in (0, 190):
+        s.poly((h + 20 + dx, 470), (W - h - 20 - 190 + dx, 280), (h + 20 + dx, 90))
+    return W
+
+
+@glyph("\u201e")
+def _lowdq(s):
+    r = s.h * 1.2; g = 2 * r + 40
+    for dx in (0, g):
+        cx = r + 40 + dx; dy = -r + 40
+        s.dot(cx, dy); s.m(cx + 2, dy - 4); s.c(cx - 4, dy - 44, cx - 16, dy - 78, cx - 34, dy - 108)
+    return g + 2 * r + 46
+
+
+@glyph("\u201a")
+def _lowsq(s):
+    r = s.h * 1.2; cx = r + 40; dy = -r + 40
+    s.dot(cx, dy); s.m(cx + 2, dy - 4); s.c(cx - 4, dy - 44, cx - 16, dy - 78, cx - 34, dy - 108); return 2 * r + 46
+
+
+def _solid_tri(s, pts):
+    pen = s.fp
+    pen.moveTo(s.pt(*pts[0]))
+    for p_ in pts[1:]:
+        pen.lineTo(s.pt(*p_))
+    pen.closePath()
+
+
+@glyph("\u25b2")
+def _triup(s):
+    W = 420; h = s.h; _solid_tri(s, [(h, 120), (W - h, 120), (W / 2, 120 + 330)]); s.poly((h, 120), (W - h, 120), (W / 2, 450), close=True); return W
+
+
+@glyph("\u25bc")
+def _tridown(s):
+    W = 420; h = s.h; _solid_tri(s, [(h, 450), (W / 2, 120), (W - h, 450)]); s.poly((h, 450), (W - h, 450), (W / 2, 120), close=True); return W
+
+
+@glyph("\u21b5")
+def _enter(s):
+    W = 560; h = s.h; r = 110
+    s.m(W - h, s.yx + 60); s.l(W - h, 190 + r - 0); s.arc(W - h - r, 190 + r - 0, r, r, 0, -90); s.l(h + 150, 190)
+    s.poly((h + 150 + 70, 190 + 80), (h + 150, 190), (h + 150 + 70, 190 - 80)); return W
+
+
 # ---------------------------------------------------------------------------------------------------------------
 # Accents (drawn centred at cx, cy) and composition of accented letters
 # ---------------------------------------------------------------------------------------------------------------
@@ -945,6 +1014,390 @@ _compose("ćńśź", "cnsz", "acute")
 _compose("ŝĉ", "sc", "circ"); _compose("čšžřěň", "cszren", "caron"); _compose("ČŠŽ", "CSZ", "caron"); _compose("ě", "e", "caron")
 
 
+
+# ---------------------------------------------------------------------------------------------------------------
+# Greek and Cyrillic. Letters that look the same as a Latin letter reuse our Latin drawing; the rest are drawn here.
+# ---------------------------------------------------------------------------------------------------------------
+def small(fn, fx=0.86):
+    """Draw a capital shape at x-height (for Cyrillic lower case that mirrors the capital)."""
+    def g(s):
+        h = s.h; W = fn(Shape(h)); Wn = 2 * h + (W - 2 * h) * fx
+        k = (XH - 2 * h) / (CAP - 2 * h)
+        s.T = lambda x, y: (h + (x - h) * fx, h + (y - h) * k)
+        fn(s); s.T = None
+        return Wn
+    return g
+
+
+def mirror(fn):
+    def g(s):
+        W = fn(Shape(s.h)); s.T = lambda x, y: (W - x, y); fn(s); s.T = None
+        return W
+    return g
+
+
+def put(ch, fn):
+    G[ch] = fn
+
+
+# --- Greek capitals ---
+@glyph("\u0393")
+def _Gamma(s):
+    W = 440; h = s.h; s.poly((h, s.yb), (h, s.yc), (W - h, s.yc)); return W
+
+
+@glyph("\u0394")
+def _Delta(s):
+    W = 650; h = s.h; s.poly((h + 6, s.yb), (W / 2, s.yc), (W - h - 6, s.yb), close=True); return W
+
+
+@glyph("\u0398")
+def _Theta(s):
+    W = 660; h = s.h; s.ell(W / 2, CAP / 2, W / 2 - h, CAP / 2 + OVER - h); s.m(W * 0.30, CAP / 2); s.l(W * 0.70, CAP / 2); return W
+
+
+@glyph("\u039b")
+def _Lambda(s):
+    W = 650; h = s.h; s.poly((h, s.yb), (W / 2, s.yc), (W - h, s.yb)); return W
+
+
+@glyph("\u039e")
+def _Xi(s):
+    W = 520; h = s.h; s.m(h, s.yc); s.l(W - h, s.yc); s.m(W * 0.2, CAP / 2); s.l(W * 0.8, CAP / 2); s.m(h, s.yb); s.l(W - h, s.yb); return W
+
+
+@glyph("\u03a0")
+def _Pi(s):
+    W = 580; h = s.h; s.poly((h, s.yb), (h, s.yc), (W - h, s.yc), (W - h, s.yb)); return W
+
+
+@glyph("\u03a3")
+def _Sigma(s):
+    W = 500; h = s.h; s.poly((W - h, s.yc), (h, s.yc), (W * 0.58, CAP / 2), (h, s.yb), (W - h, s.yb)); return W
+
+
+@glyph("\u03a6")
+def _Phi(s):
+    W = 700; h = s.h; s.m(W / 2, s.yb); s.l(W / 2, s.yc); s.ell(W / 2, CAP / 2, W * 0.36, CAP * 0.34); return W
+
+
+@glyph("\u03a8")
+def _Psi(s):
+    W = 680; h = s.h; s.m(W / 2, s.yb); s.l(W / 2, s.yc)
+    s.m(h, s.yc); s.l(h, CAP * 0.48); s.arc(W / 2, CAP * 0.48, W / 2 - h, CAP * 0.32, 180, 360); s.l(W - h, s.yc); return W
+
+
+@glyph("\u03a9")
+def _Omega(s):
+    W = 680; h = s.h; cx, cy = W / 2, CAP * 0.56; rx, ry = W / 2 - h - 18, CAP * 0.44 - h + 4
+    x0 = cx + rx * math.cos(math.radians(236))
+    s.m(h, s.yb); s.l(x0 - 4, s.yb); s.arc(cx, cy, rx, ry, 236, -56); s.l(W - x0 + 4, s.yb); s.l(W - h, s.yb); return W
+
+
+for _g, _l in zip("ΑΒΕΖΗΙΚΜΝΟΡΤΥΧ", "ABEZHIKMNOPTYX"):
+    G[_g] = G[_l]
+
+# --- Greek lower case ---
+@glyph("\u03b1")
+def _alpha(s):
+    return _a(s)
+
+
+@glyph("\u03b2")
+def _beta(s):
+    W = 500; h = s.h; ym = ASC * 0.56
+    s.m(h, s.yd); s.l(h, s.ya)
+    bowl_cap(s, h, s.ya, ym, W - h - 16); bowl_cap(s, h, ym, s.yb, W - h); return W
+
+
+@glyph("\u03b3")
+def _gamma(s):
+    W = 460; h = s.h; yy = 0.34 * XH
+    s.m(h, s.yx); s.l(W / 2, yy); s.m(W - h, s.yx); s.l(W / 2, yy); s.m(W / 2, yy); s.l(W / 2, s.yd); return W
+
+
+@glyph("\u03b4")
+def _delta(s):
+    W = 470; h = s.h
+    s.ell(W / 2, XH / 2, W / 2 - h, XH / 2 + OVER - h)
+    s.m(W * 0.40, s.yx + OVER); s.c(W * 0.52, s.yx + 60, W * 0.72, s.ya - 6, W - h - 30, s.ya); return W
+
+
+@glyph("\u03b5")
+def _eps(s):
+    W = 390; h = s.h; top, bot = s.yx + OVER, s.yb - OVER; mid = bot + 0.5 * (top - bot)
+    rx = W / 2 - h; cx = W / 2; cu, ru = (top + mid) / 2, (top - mid) / 2; cl, rl = (bot + mid) / 2, (mid - bot) / 2
+    s.T = lambda x, y: (W - x, y)
+    s.arc(cx, cu, rx * 0.9, ru, 152, -90, move=True); s.arc(cx, cl, rx, rl, 90, -152)
+    s.T = None; return W
+
+
+@glyph("\u03b6")
+def _zeta(s):
+    W = 400; h = s.h; r = 120
+    s.m(W - h - 10, s.yx); s.l(h + r, s.yx); s.arc(h + r, s.yx - r, r, r, 90, 180)
+    s.l(h, 0.40 * XH); s.arc(W / 2, 0.40 * XH, W / 2 - h, 0.40 * XH - h + 8, 180, 360)
+    s.l(W - h, 0.08 * XH) if False else None
+    s.m(h + 10, 0.40 * XH); s.c(h + 10, 0.05 * XH, W * 0.42, -20, W * 0.42, s.yd + 40); s.c(W * 0.42, s.yd, W * 0.62, s.yd, W * 0.7, s.yd + 50); return W
+
+
+@glyph("\u03b7")
+def _eta(s):
+    W = 440; h = s.h; ya = XH * 0.50
+    s.m(h, s.yb); s.l(h, s.yx); arch(s, h, W - h, s.yx + OVER, ya); s.l(W - h, s.yd); return W
+
+
+@glyph("\u03b8")
+def _theta(s):
+    W = 440; h = s.h; s.ell(W / 2, CAP / 2, W / 2 - h, CAP / 2 + OVER - h); s.m(W * 0.26, CAP / 2); s.l(W * 0.74, CAP / 2); return W
+
+
+@glyph("\u03b9")
+def _iota(s):
+    h = s.h; r = 90; W = h + r + h; s.m(h, s.yx); s.l(h, h + r); s.arc(h + r, h + r, r, r, 180, 270); return W
+
+
+@glyph("\u03ba")
+def _kappa(s):
+    return small(_K, 0.78)(s)
+
+
+@glyph("\u03bb")
+def _lambda(s):
+    W = 470; h = s.h
+    s.m(h + 4, s.ya); s.l(W - h, s.yb)
+    y = 0.46 * ASC; x = h + 4 + (W - h - h - 4) * (s.ya - y) / (s.ya - s.yb); s.m(x, y); s.l(h, s.yb); return W
+
+
+@glyph("\u03bc")
+def _mu(s):
+    W = 440; h = s.h; yb_ = XH * 0.50
+    s.m(h, s.yx); s.l(h, s.yd); s.m(h, 0.30 * XH); s.l(h, yb_); s.arc(W / 2, yb_, W / 2 - h, yb_ - (h - OVER), 180, 360)
+    s.m(W - h, s.yx); s.l(W - h, s.yb); return W
+
+
+@glyph("\u03bd")
+def _nu(s):
+    return _v(s)
+
+
+@glyph("\u03be")
+def _xi(s):
+    W = 400; h = s.h; r = 100
+    s.m(W - h - 10, s.yx); s.l(h + r, s.yx); s.arc(h + r, s.yx - r, r, r, 90, 180)
+    s.l(h, 0.60 * XH); s.arc(W / 2, 0.58 * XH, W / 2 - h, 0.15 * XH, 180, 360) if False else None
+    s.arc(W / 2, 0.58 * XH - 0, W / 2 - h, 0.2 * XH, 180, 270); s.m(W * 0.5, 0.38 * XH); s.l(W * 0.5, 0.38 * XH)
+    s.m(h + 8, 0.40 * XH); s.c(h + 8, 0.02 * XH, W * 0.42, -20, W * 0.44, s.yd + 40); s.c(W * 0.44, s.yd, W * 0.62, s.yd, W * 0.7, s.yd + 50); return W
+
+
+@glyph("\u03bf")
+def _omicron(s):
+    return _o(s)
+
+
+@glyph("\u03c0")
+def _pi(s):
+    W = 500; h = s.h
+    s.m(h, s.yx); s.l(W - h, s.yx); s.m(W * 0.27, s.yx); s.l(W * 0.27, s.yb); s.m(W * 0.73, s.yx); s.l(W * 0.73, s.yb); return W
+
+
+@glyph("\u03c1")
+def _rho(s):
+    return _p(s)
+
+
+@glyph("\u03c2")
+def _sigma_final(s):
+    W = 400; h = s.h; rx = W / 2 - h
+    s.arc(W / 2 + 6, XH / 2, rx, bowl_ry(s), 50, 270, move=True)
+    s.c(W / 2 + 60, s.yb - OVER, W - h - 6, 20, W - h - 6, -60); s.c(W - h - 6, s.yd + 6, W * 0.7, s.yd, W * 0.6, s.yd + 20); return W
+
+
+@glyph("\u03c3")
+def _sigma(s):
+    W = 560; h = s.h; ew = 450
+    s.ell(ew / 2, XH / 2, ew / 2 - h, bowl_ry(s)); s.m(ew / 2, s.yx + OVER - 1); s.l(W - h, s.yx + OVER - 1); return W
+
+
+@glyph("\u03c4")
+def _tau(s):
+    W = 400; h = s.h; r = 80
+    s.m(h, s.yx); s.l(W - h, s.yx); s.m(W / 2 - 18, s.yx); s.l(W / 2 - 18, h + r); s.arc(W / 2 - 18 + r, h + r, r, r, 180, 270); return W
+
+
+@glyph("\u03c5")
+def _upsilon(s):
+    W = 440; h = s.h; yb_ = XH * 0.50
+    s.m(h, s.yx); s.l(h, yb_); s.arc(W / 2, yb_, W / 2 - h, yb_ - (h - OVER), 180, 360); s.l(W - h, s.yx); return W
+
+
+@glyph("\u03c6")
+def _phi(s):
+    W = 520; h = s.h; s.ell(W / 2, XH / 2, W / 2 - h, bowl_ry(s)); s.m(W / 2, s.ya); s.l(W / 2, s.yd); return W
+
+
+@glyph("\u03c7")
+def _chi(s):
+    W = 440; h = s.h; s.m(h, s.yx); s.l(W - h, s.yd); s.m(W - h, s.yx); s.l(h, s.yd); return W
+
+
+@glyph("\u03c8")
+def _psi(s):
+    W = 540; h = s.h; yb_ = XH * 0.46
+    s.m(W / 2, s.ya); s.l(W / 2, s.yd)
+    s.m(h, s.yx); s.l(h, yb_); s.arc(W / 2, yb_, W / 2 - h, yb_ - (h - OVER), 180, 360); s.l(W - h, s.yx); return W
+
+
+@glyph("\u03c9")
+def _omega(s):
+    W = 640; h = s.h; r = W * 0.27 - h; cy = XH * 0.40
+    s.m(h, s.yx); s.l(h, cy); s.arc(W * 0.27, cy, r, cy - (h - OVER), 180, 360)
+    s.l(W * 0.73 - r, cy); s.arc(W * 0.73, cy, r, cy - (h - OVER), 180, 360); s.l(W - h, s.yx); return W
+
+
+# --- Cyrillic capitals ---
+G["\u0413"] = G["\u0393"]; G["\u041b"] = G["\u039b"]; G["\u041f"] = G["\u03a0"]; G["\u0424"] = G["\u03a6"]
+for _c, _l in zip("АВЕКМНОРСТХ", "ABEKMHOPCTX"):
+    G[_c] = G[_l]
+G["\u0406"] = G["I"]; G["\u0407"] = G["I"]; G["\u0401"] = G["E"]
+
+
+@glyph("\u0411")
+def _Be(s):
+    W = 520; h = s.h; ym = CAP * 0.56
+    s.poly((W - h - 6, s.yc), (h, s.yc), (h, s.yb)); bowl_cap(s, h, ym, s.yb, W - h); return W
+
+
+@glyph("\u0414")
+def _De(s):
+    W = 650; h = s.h
+    s.m(0.27 * W, s.yc); s.l(W - 0.14 * W, s.yc); s.m(0.34 * W, s.yc); s.l(0.22 * W, s.yb); s.m(0.80 * W, s.yc); s.l(0.80 * W, s.yb)
+    s.poly((h, s.yb + 64), (h, s.yb), (W - h, s.yb), (W - h, s.yb + 64)); return W
+
+
+@glyph("\u0416")
+def _Zhe(s):
+    W = 780; h = s.h
+    s.m(W / 2, s.yc); s.l(W / 2, s.yb)
+    s.poly((h, s.yc), (W / 2, CAP / 2), (h, s.yb)); s.poly((W - h, s.yc), (W / 2, CAP / 2), (W - h, s.yb)); return W
+
+
+@glyph("\u0417")
+def _Ze(s):
+    return _3(s)
+
+
+@glyph("\u0418")
+def _I_(s):
+    W = 590; h = s.h; s.m(h, s.yb); s.l(h, s.yc); s.m(W - h, s.yb); s.l(W - h, s.yc); s.m(W - h, s.yc); s.l(h, s.yb); return W
+
+
+@glyph("\u0419")
+def _Ik(s):
+    return _I_(s)
+
+
+@glyph("\u0423")
+def _U_(s):
+    W = 560; h = s.h
+    s.m(h, s.yc); s.l(W * 0.52, CAP * 0.30); s.m(W - h, s.yc); s.l(W * 0.20, s.yb - 6); return W
+
+
+@glyph("\u0426")
+def _Tse(s):
+    W = 640; h = s.h; xr = W - 0.18 * W
+    s.m(h, s.yc); s.l(h, s.yb); s.l(W - h, s.yb); s.m(xr, s.yc); s.l(xr, s.yb); s.m(W - h, s.yb); s.l(W - h, s.yb - 100); return W
+
+
+@glyph("\u0427")
+def _Che(s):
+    W = 560; h = s.h
+    s.m(h, s.yc); s.l(h, CAP * 0.62); s.c(h, CAP * 0.40, W * 0.5, CAP * 0.34, W - h, CAP * 0.46); s.m(W - h, s.yc); s.l(W - h, s.yb); return W
+
+
+@glyph("\u0428")
+def _Sha(s):
+    W = 840; h = s.h; s.poly((h, s.yc), (h, s.yb), (W - h, s.yb), (W - h, s.yc)); s.m(W / 2, s.yc); s.l(W / 2, s.yb); return W
+
+
+@glyph("\u0429")
+def _Shcha(s):
+    W = 900; h = s.h; xr = W - 0.10 * W
+    s.poly((h, s.yc), (h, s.yb), (W - h, s.yb)); s.m(xr - 0.0, s.yc); s.l(xr, s.yb); s.m(W * 0.44, s.yc); s.l(W * 0.44, s.yb); s.m(W - h, s.yb); s.l(W - h, s.yb - 100); return W
+
+
+@glyph("\u042c")
+def _Soft(s):
+    W = 520; h = s.h; s.m(h, s.yc); s.l(h, s.yb); bowl_cap(s, h, CAP * 0.55, s.yb, W - h); return W
+
+
+@glyph("\u042a")
+def _Hard(s):
+    W = 600; h = s.h; xs = 0.26 * W
+    s.m(h, s.yc); s.l(xs, s.yc); s.m(xs, s.yc); s.l(xs, s.yb); bowl_cap(s, xs, CAP * 0.55, s.yb, W - h); return W
+
+
+@glyph("\u042b")
+def _Yeru(s):
+    W = 740; h = s.h; s.m(h, s.yc); s.l(h, s.yb); bowl_cap(s, h, CAP * 0.55, s.yb, W - 0.28 * W); s.m(W - h, s.yc); s.l(W - h, s.yb); return W
+
+
+@glyph("\u042d")
+def _E_rev(s):
+    return mirror(_C)(s)
+
+
+@glyph("\u042e")
+def _Yu(s):
+    W = 860; h = s.h; rx = 0.32 * W
+    s.m(h, s.yc); s.l(h, s.yb); s.m(h, CAP / 2); s.l(0.30 * W, CAP / 2); s.ell(W - rx - h, CAP / 2, rx - 0, CAP / 2 + OVER - h); return W
+
+
+@glyph("\u042f")
+def _Ya(s):
+    return mirror(_R)(s)
+
+
+@glyph("\u0404")
+def _Ye(s):
+    W = 580; h = s.h
+    s.arc(W / 2 + 6, CAP / 2, (W + 12) / 2 - h, CAP / 2 + OVER - h, 40, 320, move=True)
+    return W
+
+
+# --- Cyrillic lower case: shapes shared with Latin, or the capital drawn at x-height ---
+for _c, _l in zip("аеорсху", "aeopcxy"):
+    G[_c] = G[_l]
+G["\u0456"] = G["i"]; G["\u0457"] = G["\u0131"]; G["\u0451"] = G["e"]
+for _c, _fn in {
+    "в": _B, "г": G["\u0393"], "з": _3, "и": G["\u0418"], "к": _K, "л": G["\u039b"], "м": _M, "н": _H, "п": G["\u03a0"], "т": _T,
+    "ч": G["\u0427"], "ш": G["\u0428"], "ь": G["\u042c"], "ъ": G["\u042a"], "ы": G["\u042b"], "э": G["\u042d"], "ю": G["\u042e"],
+    "я": G["\u042f"], "ж": G["\u0416"], "ц": G["\u0426"], "щ": G["\u0429"], "д": G["\u0414"], "є": G["\u0404"],
+}.items():
+    G[_c] = small(_fn, 0.84)
+
+
+@glyph("\u0439")
+def _ik(s):
+    return small(G["\u0418"], 0.84)(s)
+
+
+@glyph("\u0431")
+def _be(s):
+    W = 460; h = s.h
+    s.ell(W / 2, XH / 2, W / 2 - h, bowl_ry(s)); s.m(h, XH / 2); s.l(h, s.ya - 70); s.c(h, s.ya, W * 0.5, s.ya, W - h - 20, s.ya - 24); return W
+
+
+@glyph("\u0444")
+def _ef(s):
+    W = 560; h = s.h; s.ell(W / 2, XH / 2, W / 2 - h, bowl_ry(s)); s.m(W / 2, s.ya); s.l(W / 2, s.yd); return W
+
+
+
+_compose("ΆΈΉΊΌΎΏ", "ΑΕΗΙΟΥΩ", "acute"); _compose("άέήίόύώ", "αεηιουω", "acute"); _compose("ϊϋ", "ιυ", "diae")
+_compose("ЁёЇїЙй", "ЕеIıИи", "diae"); COMPOSE["Й"] = ("И", "breve"); COMPOSE["й"] = ("и", "breve")
+
+
 def draw(char, s):
     """Draw `char` into Shape s; returns its outer width."""
     if char in COMPOSE:
@@ -974,7 +1427,7 @@ DIAG = set("AVWXYvwxyTjkzZ7Z")
 def bearings(ch, h):
     base = COMPOSE[ch][0] if ch in COMPOSE else ch
     base = "i" if base == "ı" else base
-    if ch in ".,:;!?'\"" or ch in "\u2018\u2019\u201c\u201d\u2026\u00b7\u2022\u22ef":
+    if ch in ".,:;!?'\"" or ch in "\u201a\u201e\u2018\u2019\u201c\u201d\u2026\u00b7\u2022\u22ef":
         return 64, 64
     if ch in "()[]{}|":
         return 60, 60

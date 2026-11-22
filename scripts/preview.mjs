@@ -39,12 +39,12 @@ const ui = () => `
       <tr><td>how to pick a crm</td><td>76</td><td>101.0%</td></tr>
       <tr><td>renown.ai/pricing</td><td>8</td><td>0.4%</td></tr>
     </table>
-    <p>Renown watches how AI answers talk about your brand and tells you what to fix first. 14px body, 20px line. Țări și județe: ă â î ș ț.</p>
+    <p>Renown watches how AI answers talk about your brand and tells you what to fix first. 14px body, 20px line. Țări și județe: ă â î ș ț. Επισκόπηση προτροπών και αναφορών της μάρκας σας.</p>
     <div class="btns"><button class="pri">${icon('play', 'fill', 16)}Run scan</button><button>${icon('download', 'line', 16)}Export</button><button>${icon('filter', 'line', 16)}Filter</button></div>
   </main>
 </div>`;
 
-const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &@#%$€£¥ ?!.,;:“”‘’ ()[]{}<>/\\| +−=×÷ → ← ↑ ↓ ✓ ≈ … ĂÂÎȘȚ ăâîșț àáâãäå çèéêë ìíîï ñòóôõö ùúûüýÿ';
+const glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &@#%$€£¥ ?!.,;:“”‘’ ()[]{}<>/\\| +−=×÷ → ← ↑ ↓ ✓ ≈ … ĂÂÎȘȚ ăâîșț àáâãäå çèéêë ìíîï ñòóôõö ùúûüýÿ ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ αβγδεζηθικλμνξοπρσςτυφχψω άέήίόύώ АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁ абвгдежзийклмнопрстуфхцчшщъыьэюяё « » ‹ › „ ‚ ▲ ▼ ↵';
 
 const html = `<!doctype html><html data-t="dark" lang="en"><meta charset="utf-8"><title>Plume (alpha)</title>
 <style>
@@ -74,14 +74,14 @@ p{margin:6px 0;color:var(--t2)}.btns{display:flex;gap:8px;margin-top:10px}
 button{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--raised);color:var(--text);font:inherit;font-weight:500;font-size:13px}
 button.pri{background:var(--text);color:var(--on);border-color:transparent;height:40px;padding:0 16px;font-size:14px}
 </style>
-<div class="bar"><b>Plume · alpha ${'0.2.0'} · drawn from strokes, no Inter, no Söhne</b><button onclick="document.documentElement.dataset.t=document.documentElement.dataset.t==='dark'?'light':'dark'">Theme</button></div>
+<div class="bar"><b>Plume · alpha ${'0.3.0'} · drawn from strokes, no Inter, no Söhne</b><button onclick="document.documentElement.dataset.t=document.documentElement.dataset.t==='dark'?'light':'dark'">Theme</button></div>
 <div class="wrap">
   <div class="sec"><h2>Plume</h2><div class="card"><p class="hero">Rag 147</p><p class="h2">Renown AI visibility, “quotes”, 12,480</p></div></div>
   <div class="sec"><h2>In the Renown UI, with Plume Icons</h2><div class="card">${ui()}</div></div>
   <div class="sec"><h2>Weights and sizes</h2><div class="card ramp">
     ${[12, 13, 14, 16, 20, 24, 32].map((s) => `<div style="font-size:${s}px"><span>${s}px</span><i>Regular · Renown watches how AI talks about you</i><i class="w5">Medium</i><i class="w6">SemiBold</i></div>`).join('')}
   </div></div>
-  <div class="sec"><h2>Characters (Latin, Romanian, Western European, symbols)</h2><div class="cols">
+  <div class="sec"><h2>Characters (Latin, Romanian, Greek, Cyrillic, symbols)</h2><div class="cols">
     <div class="card"><h4>Regular</h4><div class="g">${glyphs}</div></div>
     <div class="card"><h4>SemiBold</h4><div class="g" style="font-weight:600">${glyphs}</div></div>
   </div></div>

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0 (alpha, 2026-11-22)
+
+- Greek (capitals, lower case, tonos and diaeresis) and Cyrillic (Russian and Ukrainian basics). Letters that look like a
+  Latin letter reuse the Latin drawing; the rest are drawn from strokes. 348 glyphs.
+- More symbols: « » ‹ › „ ‚ ▲ ▼ ↵. Covers 99% of the characters in the Renown app's English, Romanian and Greek text.
+
 ## 0.2.0 (alpha, 2026-11-22)
 
 - Stroke contrast: horizontal strokes are about 8% thinner than vertical ones, and the stroke ends are very slightly

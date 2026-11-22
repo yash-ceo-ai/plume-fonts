@@ -39,7 +39,7 @@ const screen = () => `
       <tr><td>how to pick a crm</td><td>76</td><td>101.0%</td></tr>
       <tr><td>renown.ai/pricing</td><td>8</td><td>0.4%</td></tr>
     </table>
-    <p>Renown watches how AI answers talk about your brand and tells you what to fix first. 14px body, 20px line. Țări și județe: ă â î ș ț.</p>
+    <p>Renown watches how AI answers talk about your brand and tells you what to fix first. 14px body, 20px line. Țări și județe: ă â î ș ț. Επισκόπηση προτροπών και αναφορών της μάρκας σας.</p>
     <div class="btns"><button class="pri">${icon('play', 'fill', 16)}Run scan</button><button>${icon('download', 'line', 16)}Export</button><button>${icon('filter', 'line', 16)}Filter</button></div>
     <div class="big">Rag 147 <span>Renown AI</span></div>
   </main>
