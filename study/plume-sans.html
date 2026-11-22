@@ -1,0 +1,108 @@
+<!doctype html><html data-t="dark" lang="en"><meta charset="utf-8"><title>Plume Sans (alpha)</title>
+<style>
+@font-face{font-family:'Plume Sans';src:url('../fonts/PlumeSans-Regular.woff2') format('woff2');font-weight:400}
+@font-face{font-family:'Plume Sans';src:url('../fonts/PlumeSans-Medium.woff2') format('woff2');font-weight:500}
+@font-face{font-family:'Plume Sans';src:url('../fonts/PlumeSans-SemiBold.woff2') format('woff2');font-weight:600}
+@font-face{font-family:'Inter Base';src:url('../node_modules/inter-ui/variable/InterVariable.woff2') format('woff2');font-weight:100 900}
+:root{--bg:#121110;--panel:#171615;--raised:#232221;--line:#2a2927;--text:#ecebe9;--t2:#aaa8a5;--muted:#898784;--on:#121110}
+[data-t=light]{--bg:#f3f2f0;--panel:#fff;--raised:#efeeec;--line:#e4e3e0;--text:#121110;--t2:#31302e;--muted:#676563;--on:#f3f2f0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/20px system-ui}
+.bar{position:sticky;top:0;z-index:2;display:flex;gap:12px;align-items:center;padding:10px 24px;background:var(--panel);border-bottom:1px solid var(--line)}
+.bar b{margin-right:auto;font-weight:600}.bar button{height:28px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--raised);color:var(--text);cursor:pointer}
+.wrap{max-width:1280px;margin:0 auto;padding:24px;display:grid;gap:24px}
+.sec h2{font:600 13px system-ui;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:0 0 12px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:900px){.cols{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}.card h4{margin:0 0 10px;font:500 12px system-ui;color:var(--muted)}
+.plume{font-family:'Plume Sans',sans-serif}.inter{font-family:'Inter Base',sans-serif}
+.hero{font-size:120px;line-height:120px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--text)}.h2{font-size:44px;line-height:52px;font-weight:500;letter-spacing:-.02em;margin:8px 0;color:var(--text)}
+.ramp div{display:flex;gap:16px;align-items:baseline;white-space:nowrap;overflow:hidden;line-height:1.3;padding:6px 0;border-bottom:1px solid var(--line);color:var(--t2)}.ramp span{flex:none;width:64px;font:12px system-ui;color:var(--muted)}
+.ramp .w4{font-weight:400}.ramp .w5{font-weight:500}.ramp .w6{font-weight:600}
+.g{font-size:26px;line-height:38px;word-break:break-all;color:var(--text)}.g.s{font-size:15px;line-height:24px;color:var(--t2)}
+.ui{display:grid;grid-template-columns:150px 1fr;gap:16px;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px}
+.nav{display:flex;align-items:center;gap:10px;height:32px;padding:0 8px;border-radius:8px;color:var(--muted)}.nav.on{background:var(--raised);color:var(--text);font-weight:500}
+.nav svg,button svg{flex:none}h3{margin:0 0 10px;font-size:24px;line-height:28px;font-weight:500;letter-spacing:-.01em}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}.kpis div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;background:var(--panel)}
+.kpis small{color:var(--muted);font-size:13px}.kpis b{font-size:28px;line-height:34px;font-weight:500;font-variant-numeric:tabular-nums}.kpis em{font-style:normal;color:#35a06c;font-size:13px}.kpis em.r{color:#e5484d}
+table{width:100%;border-collapse:collapse;margin-bottom:10px;font-variant-numeric:tabular-nums}th{text-align:left;font-weight:500;color:var(--muted);font-size:13px}th+th,td+td{text-align:right}td,th{padding:6px 0;border-bottom:1px solid var(--line)}
+p{margin:6px 0;color:var(--t2)}p.x{font-size:13px}
+.btns{display:flex;gap:8px;margin-top:10px}button{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--raised);color:var(--text);font:inherit;font-weight:500;font-size:13px}
+button.pri{background:var(--text);color:var(--on);border-color:transparent;height:40px;padding:0 16px;font-size:14px}
+</style>
+<div class="bar"><b>Plume Sans · alpha 0.1.0 · Inter base, corners softened to match Plume Icons</b><button onclick="document.documentElement.dataset.t=document.documentElement.dataset.t==='dark'?'light':'dark'">Theme</button></div>
+<div class="wrap">
+  <div class="sec"><h2>Plume Sans next to its base, Inter</h2><div class="cols">
+    <div class="card plume"><h4>Plume Sans</h4><p class="hero">Rag 147</p><p class="h2">Renown AI visibility, “quotes”, 12,480</p></div>
+    <div class="card inter"><h4>Inter (original)</h4><p class="hero">Rag 147</p><p class="h2">Renown AI visibility, “quotes”, 12,480</p></div>
+  </div></div>
+  <div class="sec"><h2>In the Renown UI, with Plume Icons</h2><div class="cols">
+    <div class="card"><h4>Plume Sans + Plume Icons</h4>
+<div class="ui plume">
+  <aside>
+    <div class="nav on"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><mask id="ivk7suplume-dashboard-fill-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="#fff" stroke="none"/><path d="M9.75 3.75v16.5m0-8.25h10.5" stroke="#000"/></mask><rect x="3.75" y="3.75" width="16.5" height="16.5" rx="5.25" fill="currentColor" mask="url(#ivk7suplume-dashboard-fill-cut)"/></svg>Overview</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.25 8V6.75A3.25 3.25 0 0 1 11.5 3.5h5.75a3.25 3.25 0 0 1 3.25 3.25v3.5a3.25 3.25 0 0 1-3.25 3.25H16"/><path d="M7 8h5.5a3.5 3.5 0 0 1 3.5 3.5V15a3.5 3.5 0 0 1-3.5 3.5h-4l-3 2.25V18.2a3.5 3.5 0 0 1-2-3.2v-3.5A3.5 3.5 0 0 1 7 8"/></svg>Prompts</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.75" y="3.75" width="16.5" height="16.5" rx="5.25"/><path d="M12 8.25 15.75 12 12 15.75 8.25 12Z"/></svg>Brand</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.6 15.6 3.9 3.9M7.6 9.6a3.1 3.1 0 0 1 2-2"/></svg>Search</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.4" r="1.35" fill="currentColor" stroke="none"/><circle cx="17.37" cy="6.63" r="1.35" fill="currentColor" stroke="none"/><circle cx="19.6" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="17.37" cy="17.37" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="19.6" r="1.35" fill="currentColor" stroke="none"/><circle cx="6.63" cy="17.37" r="1.35" fill="currentColor" stroke="none"/><circle cx="4.4" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="6.63" cy="6.63" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="2.1" fill="currentColor" stroke="none"/></svg>Site checks</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.75h7.75a4.5 4.5 0 0 1 4.5 4.5V16"/><rect x="3.75" y="7.75" width="12.5" height="12.5" rx="4"/><path d="m7.35 14.1 2 2 3.3-3.6"/></svg>To-do</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7.5" width="16" height="12.5" rx="5.25"/><path d="M12 7.5V5.4m-2.4 7.2v1.9m4.8-1.9v1.9"/><circle cx="12" cy="4.1" r="1.35" fill="currentColor" stroke="none"/></svg>Otto</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.4a2.7 2.7 0 0 1 4.67 1.93A2.7 2.7 0 0 1 18.6 12a2.7 2.7 0 0 1-1.93 4.67A2.7 2.7 0 0 1 12 18.6a2.7 2.7 0 0 1-4.67-1.93A2.7 2.7 0 0 1 5.4 12a2.7 2.7 0 0 1 1.93-4.67A2.7 2.7 0 0 1 12 5.4"/><circle cx="12" cy="12" r="2.5"/></svg>Settings</div>
+  </aside>
+  <main>
+    <h3>AI visibility</h3>
+    <div class="kpis">
+      <div><small>Mentions this week</small><b>12,480</b><em>+8.2%</em></div>
+      <div><small>Share of voice</small><b>38.5%</b><em class="r">−1.4%</em></div>
+      <div><small>Prompts tracked</small><b>1,204</b><em>+24</em></div>
+    </div>
+    <table>
+      <tr><th>Prompt</th><th>Mentions</th><th>Share</th></tr>
+      <tr><td>best crm for startups</td><td>1,204</td><td>38.5%</td></tr>
+      <tr><td>crm pricing comparison</td><td>987</td><td>12.1%</td></tr>
+      <tr><td>how to pick a crm</td><td>76</td><td>101.0%</td></tr>
+      <tr><td>renown.ai/pricing</td><td>8</td><td>0.4%</td></tr>
+    </table>
+    <p>Renown watches how AI answers talk about your brand and tells you what to fix first. “Round quotes” and commas, 14px body, 20px line.</p>
+    <p class="x">Επισκόπηση προτροπών και αναφορών της μάρκας σας. · Țări, județe și județul Cluj: ș ț ă î â. · Тест кириллицы.</p>
+    <div class="btns"><button class="pri"><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6.1v11.8a1.2 1.2 0 0 0 1.82 1.03l9.3-5.9a1.2 1.2 0 0 0 0-2.06l-9.3-5.9A1.2 1.2 0 0 0 8 6.1" fill="currentColor"/></svg>Run scan</button><button><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5v10m-4.25-4L12 14.75l4.25-4.25M5 15.5v.75A3.75 3.75 0 0 0 8.75 20h6.5A3.75 3.75 0 0 0 19 16.25v-.75"/></svg>Export</button><button><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 7h15m-12 5h9m-6 5h3"/></svg>Filter</button></div>
+  </main>
+</div></div>
+    <div class="card"><h4>Inter + Plume Icons</h4>
+<div class="ui inter">
+  <aside>
+    <div class="nav on"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><mask id="ieo0k4plume-dashboard-fill-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="#fff" stroke="none"/><path d="M9.75 3.75v16.5m0-8.25h10.5" stroke="#000"/></mask><rect x="3.75" y="3.75" width="16.5" height="16.5" rx="5.25" fill="currentColor" mask="url(#ieo0k4plume-dashboard-fill-cut)"/></svg>Overview</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8.25 8V6.75A3.25 3.25 0 0 1 11.5 3.5h5.75a3.25 3.25 0 0 1 3.25 3.25v3.5a3.25 3.25 0 0 1-3.25 3.25H16"/><path d="M7 8h5.5a3.5 3.5 0 0 1 3.5 3.5V15a3.5 3.5 0 0 1-3.5 3.5h-4l-3 2.25V18.2a3.5 3.5 0 0 1-2-3.2v-3.5A3.5 3.5 0 0 1 7 8"/></svg>Prompts</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.75" y="3.75" width="16.5" height="16.5" rx="5.25"/><path d="M12 8.25 15.75 12 12 15.75 8.25 12Z"/></svg>Brand</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.6 15.6 3.9 3.9M7.6 9.6a3.1 3.1 0 0 1 2-2"/></svg>Search</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.4" r="1.35" fill="currentColor" stroke="none"/><circle cx="17.37" cy="6.63" r="1.35" fill="currentColor" stroke="none"/><circle cx="19.6" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="17.37" cy="17.37" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="19.6" r="1.35" fill="currentColor" stroke="none"/><circle cx="6.63" cy="17.37" r="1.35" fill="currentColor" stroke="none"/><circle cx="4.4" cy="12" r="1.35" fill="currentColor" stroke="none"/><circle cx="6.63" cy="6.63" r="1.35" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="2.1" fill="currentColor" stroke="none"/></svg>Site checks</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.75h7.75a4.5 4.5 0 0 1 4.5 4.5V16"/><rect x="3.75" y="7.75" width="12.5" height="12.5" rx="4"/><path d="m7.35 14.1 2 2 3.3-3.6"/></svg>To-do</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7.5" width="16" height="12.5" rx="5.25"/><path d="M12 7.5V5.4m-2.4 7.2v1.9m4.8-1.9v1.9"/><circle cx="12" cy="4.1" r="1.35" fill="currentColor" stroke="none"/></svg>Otto</div>
+    <div class="nav"><svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.4a2.7 2.7 0 0 1 4.67 1.93A2.7 2.7 0 0 1 18.6 12a2.7 2.7 0 0 1-1.93 4.67A2.7 2.7 0 0 1 12 18.6a2.7 2.7 0 0 1-4.67-1.93A2.7 2.7 0 0 1 5.4 12a2.7 2.7 0 0 1 1.93-4.67A2.7 2.7 0 0 1 12 5.4"/><circle cx="12" cy="12" r="2.5"/></svg>Settings</div>
+  </aside>
+  <main>
+    <h3>AI visibility</h3>
+    <div class="kpis">
+      <div><small>Mentions this week</small><b>12,480</b><em>+8.2%</em></div>
+      <div><small>Share of voice</small><b>38.5%</b><em class="r">−1.4%</em></div>
+      <div><small>Prompts tracked</small><b>1,204</b><em>+24</em></div>
+    </div>
+    <table>
+      <tr><th>Prompt</th><th>Mentions</th><th>Share</th></tr>
+      <tr><td>best crm for startups</td><td>1,204</td><td>38.5%</td></tr>
+      <tr><td>crm pricing comparison</td><td>987</td><td>12.1%</td></tr>
+      <tr><td>how to pick a crm</td><td>76</td><td>101.0%</td></tr>
+      <tr><td>renown.ai/pricing</td><td>8</td><td>0.4%</td></tr>
+    </table>
+    <p>Renown watches how AI answers talk about your brand and tells you what to fix first. “Round quotes” and commas, 14px body, 20px line.</p>
+    <p class="x">Επισκόπηση προτροπών και αναφορών της μάρκας σας. · Țări, județe și județul Cluj: ș ț ă î â. · Тест кириллицы.</p>
+    <div class="btns"><button class="pri"><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6.1v11.8a1.2 1.2 0 0 0 1.82 1.03l9.3-5.9a1.2 1.2 0 0 0 0-2.06l-9.3-5.9A1.2 1.2 0 0 0 8 6.1" fill="currentColor"/></svg>Run scan</button><button><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4.5v10m-4.25-4L12 14.75l4.25-4.25M5 15.5v.75A3.75 3.75 0 0 0 8.75 20h6.5A3.75 3.75 0 0 0 19 16.25v-.75"/></svg>Export</button><button><svg width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 7h15m-12 5h9m-6 5h3"/></svg>Filter</button></div>
+  </main>
+</div></div>
+  </div></div>
+  <div class="sec"><h2>Weights and sizes</h2><div class="card plume ramp">
+    <div style="font-size:12px"><span>12px</span><i class="w4" style="font-style:normal">Regular 400 · Renown watches how AI talks about you</i><i class="w5" style="font-style:normal">Medium 500</i><i class="w6" style="font-style:normal">SemiBold 600</i></div><div style="font-size:13px"><span>13px</span><i class="w4" style="font-style:normal">Regular 400 · Renown watches how AI talks about you</i><i class="w5" style="font-style:normal">Medium 500</i><i class="w6" style="font-style:normal">SemiBold 600</i></div><div style="font-size:14px"><span>14px</span><i class="w4" style="font-style:normal">Regular 400 · Renown watches how AI talks about you</i><i class="w5" style="font-style:normal">Medium 500</i><i class="w6" style="font-style:normal">SemiBold 600</i></div><div style="font-size:16px"><span>16px</span><i class="w4" style="font-style:normal">Regular 400 · Renown watches how AI talks about you</i><i class="w5" style="font-style:normal">Medium 500</i><i class="w6" style="font-style:normal">SemiBold 600</i></div><div style="font-size:20px"><span>20px</span><i class="w4" style="font-style:normal">Regular 400 · Renown watches how AI talks about you</i><i class="w5" style="font-style:normal">Medium 500</i><i class="w6" style="font-style:normal">SemiBold 600</i></div><div style="font-size:24px"><span>24px</span><i class="w4" style="font-style:normal">Regular 400 · Renown watches how AI talks about you</i><i class="w5" style="font-style:normal">Medium 500</i><i class="w6" style="font-style:normal">SemiBold 600</i></div><div style="font-size:32px"><span>32px</span><i class="w4" style="font-style:normal">Regular 400 · Renown watches how AI talks about you</i><i class="w5" style="font-style:normal">Medium 500</i><i class="w6" style="font-style:normal">SemiBold 600</i></div>
+  </div></div>
+  <div class="sec"><h2>Characters (Latin, Romanian, Greek, Cyrillic)</h2><div class="cols">
+    <div class="card plume"><h4>Plume Sans</h4><div class="g">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &@#%$€£ ?!.,;:“”‘’ ()[]{}<>/\| +−=×÷ ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ αβγδεζηθικλμνξοπρστυφχψω ĂÂÎȘȚ ăâîșț АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ</div></div>
+    <div class="card inter"><h4>Inter</h4><div class="g">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &@#%$€£ ?!.,;:“”‘’ ()[]{}<>/\| +−=×÷ ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ αβγδεζηθικλμνξοπρστυφχψω ĂÂÎȘȚ ăâîșț АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ</div></div>
+  </div></div>
+</div></html>

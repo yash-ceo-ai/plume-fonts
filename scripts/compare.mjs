@@ -1,7 +1,6 @@
 // Task 1 demo: the app's real UI text in each OFL candidate, side by side, dark and light.
-// Writes study/compare.html (OFL fonts only, committed) and, if Klim's trial files exist on this machine,
-// .local/compare-with-sohne.html (not committed: the trial licence allows trying them in design work only).
-import { existsSync, mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+// Writes study/compare.html (OFL fonts only).
+import { mkdirSync, writeFileSync } from 'node:fs';
 
 const root = new URL('..', import.meta.url).pathname;
 const FS = 'node_modules/@fontsource-variable';
@@ -13,12 +12,9 @@ const fonts = [
   { id: 'figtree', name: 'Figtree', family: 'Figtree Variable', greek: false },
   { id: 'schibsted-grotesk', name: 'Schibsted Grotesk', family: 'Schibsted Grotesk Variable', greek: false },
 ];
-const TRIAL = '/Users/yash/Projects/_trial-fonts/sohne-font-family';
-const hasTrial = existsSync(`${TRIAL}/TestSohne-Buch-BF663d89cd32e6a.otf`);
-
 const panel = (f) => `
-<section class="p" style="font-family:'${f.family}'${f.sohne ? ',sans-serif' : ", 'Geist Variable', sans-serif"}">
-  <h2>${f.name}${f.greek === false ? ' <i>no Greek</i>' : ''}${f.sohne ? ' <i>trial, local only</i>' : ''}</h2>
+<section class="p" style="font-family:'${f.family}'${", 'Geist Variable', sans-serif"}">
+  <h2>${f.name}${f.greek === false ? ' <i>no Greek</i>' : ''}</h2>
   <div class="big">Aa Gg Rr 1 4 7 &amp;</div>
   <div class="abc">Hamburgefonstiv 0123456789<br>abcdefghijklmnopqrstuvwxyz</div>
   <div class="ui">
@@ -41,9 +37,7 @@ const panel = (f) => `
 
 function page(list, title) {
   const links = fonts.map((f) => `<link rel="stylesheet" href="../${FS}/${f.id}/index.css">`).join('\n');
-  const sohne = list.some((f) => f.sohne)
-    ? `<style>@font-face{font-family:'Sohne Trial';src:url('${TRIAL}/TestSohne-Buch-BF663d89cd32e6a.otf');font-weight:400}@font-face{font-family:'Sohne Trial';src:url('${TRIAL}/TestSohne-Kraftig-BF663d89cd37e26.otf');font-weight:500}@font-face{font-family:'Sohne Trial';src:url('${TRIAL}/TestSohne-Halbfett-BF663d89cd2d67b.otf');font-weight:600}</style>`
-    : '';
+  const sohne = '';
   return `<!doctype html><html data-t="dark"><meta charset="utf-8"><title>${title}</title>
 ${links}${sohne}
 <style>
@@ -70,9 +64,3 @@ p{margin:6px 0;color:var(--text2)}button.x,.main button{margin-top:6px;height:32
 mkdirSync(`${root}study`, { recursive: true });
 writeFileSync(`${root}study/compare.html`, page(fonts, 'Plume Sans: OFL candidates in the Renown UI'));
 console.log('study/compare.html');
-if (hasTrial) {
-  mkdirSync(`${root}.local`, { recursive: true });
-  const withSohne = [{ id: 'sohne', name: 'Söhne (Klim trial)', family: 'Sohne Trial', sohne: true, greek: true }, ...fonts];
-  writeFileSync(`${root}.local/compare-with-sohne.html`, page(withSohne, 'Candidates next to Söhne (local only)').replaceAll('../node_modules', '../node_modules'));
-  console.log('.local/compare-with-sohne.html');
-}
