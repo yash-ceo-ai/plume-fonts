@@ -4,7 +4,10 @@
 [Plume Icons](https://github.com/yash-ceo-ai/plume-icons). No outline, spacing or kerning from Inter, Söhne or any other
 font went into it.
 
-Status: **alpha 0.1.0**. Preview: open `study/plume.html` (run `node scripts/preview.mjs` first if it is missing).
+Status: **alpha 0.1.0**. Previews (run `npm run preview` and `npm run slider` first if they are missing):
+
+- `study/plume.html`: Plume in the Renown UI, with weights, sizes and every character.
+- `study/compare-slider.html`: a before and after slider, today's font (Geist) against Plume, on the same screen.
 
 ## How it is made
 
@@ -26,6 +29,7 @@ npm install
 python3 -m venv .venv && .venv/bin/pip install fonttools brotli skia-pathops
 .venv/bin/python scripts/build_plume.py     # fonts/Plume-{Regular,Medium,SemiBold}.{ttf,woff2}
 node scripts/preview.mjs                    # study/plume.html
+node scripts/slider.mjs                     # study/compare-slider.html
 ```
 
 ## Use
