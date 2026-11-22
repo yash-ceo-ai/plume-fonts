@@ -74,7 +74,7 @@ p{margin:6px 0;color:var(--t2)}.btns{display:flex;gap:8px;margin-top:10px}
 button{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--raised);color:var(--text);font:inherit;font-weight:500;font-size:13px}
 button.pri{background:var(--text);color:var(--on);border-color:transparent;height:40px;padding:0 16px;font-size:14px}
 </style>
-<div class="bar"><b>Plume · alpha ${'0.1.0'} · drawn from strokes, no Inter, no Söhne</b><button onclick="document.documentElement.dataset.t=document.documentElement.dataset.t==='dark'?'light':'dark'">Theme</button></div>
+<div class="bar"><b>Plume · alpha ${'0.2.0'} · drawn from strokes, no Inter, no Söhne</b><button onclick="document.documentElement.dataset.t=document.documentElement.dataset.t==='dark'?'light':'dark'">Theme</button></div>
 <div class="wrap">
   <div class="sec"><h2>Plume</h2><div class="card"><p class="hero">Rag 147</p><p class="h2">Renown AI visibility, “quotes”, 12,480</p></div></div>
   <div class="sec"><h2>In the Renown UI, with Plume Icons</h2><div class="card">${ui()}</div></div>
