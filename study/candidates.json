@@ -1,0 +1,198 @@
+{
+  "geist": {
+    "upm": 1000,
+    "x_height": 0.53,
+    "cap_height": 0.71,
+    "x_to_cap": 0.746,
+    "ascender": 1.005,
+    "descender": -0.295,
+    "avg_lower_width": 0.534,
+    "avg_digit_width": 0.583,
+    "tabular_figures_default": false,
+    "o_width": 0.573,
+    "weight_axis": [
+      100.0,
+      400.0,
+      900.0
+    ],
+    "subsets": [
+      "cyrillic",
+      "cyrillic-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "scripts": [
+      "cyrillic",
+      "latin",
+      "vietnamese"
+    ],
+    "language_coverage_pct": {
+      "en": 91.4,
+      "ro": 92.1,
+      "el": 61.0,
+      "ar": 63.6
+    }
+  },
+  "inter": {
+    "upm": 2048,
+    "x_height": 0.546,
+    "cap_height": 0.728,
+    "x_to_cap": 0.75,
+    "ascender": 0.969,
+    "descender": -0.241,
+    "avg_lower_width": 0.536,
+    "avg_digit_width": 0.593,
+    "tabular_figures_default": false,
+    "o_width": 0.6,
+    "weight_axis": [
+      100.0,
+      400.0,
+      900.0
+    ],
+    "subsets": [
+      "cyrillic",
+      "cyrillic-ext",
+      "greek",
+      "greek-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "scripts": [
+      "cyrillic",
+      "greek",
+      "latin",
+      "vietnamese"
+    ],
+    "language_coverage_pct": {
+      "en": 91.4,
+      "ro": 92.1,
+      "el": 95.1,
+      "ar": 63.6
+    }
+  },
+  "hanken-grotesk": {
+    "upm": 1000,
+    "x_height": 0.493,
+    "cap_height": 0.697,
+    "x_to_cap": 0.707,
+    "ascender": 1.0,
+    "descender": -0.303,
+    "avg_lower_width": 0.504,
+    "avg_digit_width": 0.56,
+    "tabular_figures_default": true,
+    "o_width": 0.577,
+    "weight_axis": [
+      100.0,
+      400.0,
+      900.0
+    ],
+    "subsets": [
+      "cyrillic-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "scripts": [
+      "latin",
+      "vietnamese"
+    ],
+    "language_coverage_pct": {
+      "en": 89.5,
+      "ro": 90.4,
+      "el": 56.6,
+      "ar": 62.3
+    }
+  },
+  "instrument-sans": {
+    "upm": 1000,
+    "x_height": 0.51,
+    "cap_height": 0.72,
+    "x_to_cap": 0.708,
+    "ascender": 0.97,
+    "descender": -0.25,
+    "avg_lower_width": 0.525,
+    "avg_digit_width": 0.567,
+    "tabular_figures_default": false,
+    "o_width": 0.584,
+    "weight_axis": [
+      400.0,
+      400.0,
+      700.0
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "language_coverage_pct": {
+      "en": 91.4,
+      "ro": 92.1,
+      "el": 57.7,
+      "ar": 63.6
+    }
+  },
+  "figtree": {
+    "upm": 1000,
+    "x_height": 0.5,
+    "cap_height": 0.7,
+    "x_to_cap": 0.714,
+    "ascender": 0.95,
+    "descender": -0.25,
+    "avg_lower_width": 0.499,
+    "avg_digit_width": 0.559,
+    "tabular_figures_default": false,
+    "o_width": 0.579,
+    "weight_axis": [
+      300.0,
+      300.0,
+      900.0
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "language_coverage_pct": {
+      "en": 91.4,
+      "ro": 92.1,
+      "el": 57.7,
+      "ar": 63.6
+    }
+  },
+  "schibsted-grotesk": {
+    "upm": 2048,
+    "x_height": 0.527,
+    "cap_height": 0.703,
+    "x_to_cap": 0.75,
+    "ascender": 0.977,
+    "descender": -0.258,
+    "avg_lower_width": 0.526,
+    "avg_digit_width": 0.557,
+    "tabular_figures_default": false,
+    "o_width": 0.597,
+    "weight_axis": [
+      400.0,
+      400.0,
+      900.0
+    ],
+    "subsets": [
+      "latin",
+      "latin-ext"
+    ],
+    "scripts": [
+      "latin"
+    ],
+    "language_coverage_pct": {
+      "en": 91.4,
+      "ro": 92.1,
+      "el": 57.7,
+      "ar": 63.6
+    }
+  }
+}
