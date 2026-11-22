@@ -60,7 +60,7 @@ const html = `<!doctype html><html data-t="dark" lang="en"><meta charset="utf-8"
 .bar b{margin-right:auto;font-weight:600}.bar button{height:28px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--raised);color:var(--text);cursor:pointer}
 .wrap{max-width:1280px;margin:0 auto;padding:24px;display:grid;gap:24px}
 .sec h2{font:600 13px system-ui;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:0 0 12px}
-.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:900px){.cols{grid-template-columns:1fr}}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}@media(max-width:900px){.cols{grid-template-columns:minmax(0,1fr)}}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}.card h4{margin:0 0 10px;font:500 12px system-ui;color:var(--muted)}
 .plume{font-family:'Plume Sans',sans-serif}.inter{font-family:'Inter Base',sans-serif}
 .hero{font-size:120px;line-height:120px;font-weight:600;letter-spacing:-.03em;margin:0;color:var(--text)}.h2{font-size:44px;line-height:52px;font-weight:500;letter-spacing:-.02em;margin:8px 0;color:var(--text)}
