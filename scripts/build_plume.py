@@ -12,13 +12,15 @@ import pathops
 from pathops import LineCap, LineJoin, PathOp
 from fontTools.fontBuilder import FontBuilder
 from fontTools.pens.cu2quPen import Cu2QuPen
+from fontTools.pens.transformPen import TransformPen
 from fontTools.pens.ttGlyphPen import TTGlyphPen
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 UPM = 1000
-XH, CAP, ASC, DESC, OVER = 520, 720, 760, -210, 10  # outer x-height, cap height, ascender, descender, round overshoot
+XH, CAP, ASC, DESC, OVER = 545, 720, 770, -215, 10  # outer x-height, cap height, ascender, descender, round overshoot
 WEIGHTS = {400: ("Regular", 76), 500: ("Medium", 92), 600: ("SemiBold", 110)}
+KY = 1.09  # strokes are drawn with the height stretched by KY, then squeezed back: horizontals come out 1/KY thinner than verticals
 TAB = 570  # advance of every digit: figures line up in tables by default
 
 
@@ -36,7 +38,7 @@ class Shape:
     def pt(self, x, y):
         if self.T:
             x, y = self.T(x, y)
-        return (x + self.ox, y)
+        return (x + self.ox, y * KY)
 
     def m(self, x, y):
         self._end()
@@ -242,13 +244,13 @@ def _i(s):
 
 @glyph("i")
 def _i_dot(s):
-    W = 2 * s.h; s.m(s.h, s.yb); s.l(s.h, s.yx); s.dot(s.h, XH + 138); return W
+    W = 2 * s.h; s.m(s.h, s.yb); s.l(s.h, s.yx); s.dot(s.h, XH + 128); return W
 
 
 @glyph("j")
 def _j(s):
     h = s.h; r = 118; xs = 175; W = xs + h; cy = DESC + h + r
-    s.m(xs, s.yx); s.l(xs, cy); s.arc(xs - r, cy, r, r, 0, -112); s.dot(xs, XH + 138); return W
+    s.m(xs, s.yx); s.l(xs, cy); s.arc(xs - r, cy, r, r, 0, -112); s.dot(xs, XH + 128); return W
 
 
 @glyph("l")
@@ -260,7 +262,7 @@ def _l(s):
 @glyph("t")
 def _t(s):
     h = s.h; r = 108; xs = 128; W = 296
-    s.m(xs, 660 - h); s.l(xs, h + r); s.arc(xs + r, h + r, r, r, 180, 270)
+    s.m(xs, 690 - h); s.l(xs, h + r); s.arc(xs + r, h + r, r, r, 180, 270)
     s.m(h, s.yx); s.l(W - h, s.yx); return W
 
 
@@ -724,20 +726,29 @@ def _pct(s):
 
 @glyph("&")
 def _amp(s):
-    W = 600; h = s.h
-    s.m(W - h, s.yb); s.l(0.17 * W, 0.62 * CAP)
-    s.arc(0.34 * W, 0.78 * CAP, 0.15 * W, 0.19 * CAP, 215, -35)
-    s.m(0.34 * W + 0.15 * W * math.cos(math.radians(-35)), 0.78 * CAP + 0.19 * CAP * math.sin(math.radians(-35)))
-    s.l(0.12 * W, 0.28 * CAP); s.arc(0.34 * W, 0.22 * CAP, 0.22 * W, 0.22 * CAP - 6, 180, 295)
-    s.m(0.54 * W, 0.40 * CAP); s.l(W - h, 0.40 * CAP); return W
+    W = 620; h = s.h; C_ = CAP
+    cx1, cy1, rx1, ry1 = 0.34 * W, 0.775 * C_, 0.155 * W, 0.17 * C_      # upper loop
+    cx2, cy2, rx2, ry2 = 0.37 * W, 0.235 * C_, 0.255 * W, 0.235 * C_ - 4  # lower bowl
+    a_b = math.radians(236)
+    bx, by = cx1 + rx1 * math.cos(a_b), cy1 + ry1 * math.sin(a_b)
+    s.m(W - h - 6, s.yb); s.l(bx, by)
+    s.arc(cx1, cy1, rx1, ry1, 236, -48)
+    ex, ey = cx1 + rx1 * math.cos(math.radians(-48)), cy1 + ry1 * math.sin(math.radians(-48))
+    dx, dy = cx2 + rx2 * math.cos(math.radians(172)), cy2 + ry2 * math.sin(math.radians(172))
+    s.l(dx, dy)
+    s.arc(cx2, cy2, rx2, ry2, 172, 352)
+    s.l(W - h - 14, 0.43 * C_); return W
 
 
 @glyph("@")
 def _at(s):
-    W = 800; h = s.h; cx, cy = W / 2, 270
-    s.arc(cx, cy, W / 2 - h, 330 - h, 0, 332, move=True)
-    s.ell(cx - 10, cy, 108, 110)
-    s.m(cx + 98, cy + 80); s.l(cx + 98, cy - 40); s.arc(cx + 165, cy - 40, 67, 67, 180, 330); return W
+    W = 780; h = s.h; cx, cy = W / 2, 262
+    s.arc(cx, cy, W / 2 - h, 322 - h, 22, 338, move=True)             # outer ring, open at the right
+    ir = 104; ix = cx - 22
+    s.ell(ix, cy, ir, ir + 6)                                          # the 'a'
+    sx = ix + ir
+    s.m(sx, cy + 78); s.l(sx, cy - 52); s.c(sx, cy - 126, sx + 112, cy - 122, sx + 150, cy - 12)   # stem curling to the ring
+    return W
 
 
 @glyph("$")
@@ -769,30 +780,41 @@ def _grave(s):
     W = 240; s.m(s.h, s.yc); s.l(W - s.h, s.yc - 110); return W
 
 
+def quote_mark(s, cx, closing):
+    """One curly-quote comma: a round dot with a short tail. Closing marks (’ ”) hang the tail down-left, opening marks
+    (‘ “) lift it up-right. The top of the mark is at cap height."""
+    h = s.h; r = h * 1.2; top = CAP - 6
+    if closing:
+        dy = top - r; s.dot(cx, dy); s.m(cx + 2, dy - 4); s.c(cx - 4, dy - 44, cx - 16, dy - 78, cx - 34, dy - 108)
+    else:
+        ty = top - h
+        dy = ty - 108; s.dot(cx, dy); s.m(cx - 2, dy + 4); s.c(cx + 4, dy + 44, cx + 16, dy + 78, cx + 34, ty)
+
+
 @glyph("\u2018")
 def _lsq(s):
-    r = s.h * 1.12; s.dot(r + 8, s.yc - r + 10); s.m(r + 8, s.yc - r + 10); s.l(r + 32, s.yc + 20); return 2 * r + 24
+    r = s.h * 1.2; cx = r + 6; quote_mark(s, cx, False); return 2 * r + 46
 
 
 @glyph("\u2019")
 def _rsq(s):
-    r = s.h * 1.12; s.dot(r + 8, s.yc - r + 10); s.m(r + 8, s.yc - r + 10); s.l(r - 18, s.yc - 118); return 2 * r + 16
+    r = s.h * 1.2; cx = r + 40; quote_mark(s, cx, True); return 2 * r + 46
 
 
 @glyph("\u201c")
 def _ldq(s):
-    r = s.h * 1.12; g = 2 * r + 36
+    r = s.h * 1.2; g = 2 * r + 40
     for dx in (0, g):
-        s.dot(r + 8 + dx, s.yc - r + 10); s.m(r + 8 + dx, s.yc - r + 10); s.l(r + 32 + dx, s.yc + 20)
-    return g + 2 * r + 24
+        quote_mark(s, r + 6 + dx, False)
+    return g + 2 * r + 46
 
 
 @glyph("\u201d")
 def _rdq(s):
-    r = s.h * 1.12; g = 2 * r + 36
+    r = s.h * 1.2; g = 2 * r + 40
     for dx in (0, g):
-        s.dot(r + 8 + dx, s.yc - r + 10); s.m(r + 8 + dx, s.yc - r + 10); s.l(r - 18 + dx, s.yc - 118)
-    return g + 2 * r + 16
+        quote_mark(s, r + 40 + dx, True)
+    return g + 2 * r + 46
 
 
 @glyph("\u2026")
@@ -995,7 +1017,7 @@ def kerning_pairs():
 
 def to_ttglyph(path):
     pen = TTGlyphPen(None)
-    path.draw(Cu2QuPen(pen, max_err=0.6, reverse_direction=True))
+    path.draw(TransformPen(Cu2QuPen(pen, max_err=0.6, reverse_direction=True), (1, 0, 0, 1 / KY, 0, 0)))
     return pen.glyph()
 
 
